@@ -20,3 +20,4 @@ Exo4: Exo4.o
 clean:
 	rm -f *.o
 	rm -f *~
+	rm -f Exo1 Exo2 Exo3 Exo4

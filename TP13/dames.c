@@ -37,7 +37,6 @@ int game_over(unsigned long int n) {
 
 void set_all_positive_bits(unsigned long int* n, int line, int column) {
 	for (int i=0;i<8;i++) {
-		printf("%d\n", line_column_to_position(line, i));
 		// Colonne
 		set_positive_bit_ULI(n, line_column_to_position(line, i));
 		// Ligne

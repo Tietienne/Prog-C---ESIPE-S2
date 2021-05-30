@@ -1,8 +1,9 @@
 #ifndef __TAQUIN__
 #define __TAQUIN__
 
-#define NB_COL 2
-#define NB_LIG 2
+// Pour changer la difficulté : faites "make clean" puis modifier les valeurs ci-dessous (2 et 2 pour que ce soit le plus simple possible) puis faites "make".
+#define NB_COL 3
+#define NB_LIG 3
 
 typedef struct carre{
 	int lig;

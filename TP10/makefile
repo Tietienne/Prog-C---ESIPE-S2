@@ -14,3 +14,4 @@ Exo2: Exo2.o
 clean:
 	rm -f *.o
 	rm -f *~
+	rm -f Exo1 Exo2

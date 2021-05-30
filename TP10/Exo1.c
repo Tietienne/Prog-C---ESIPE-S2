@@ -11,6 +11,8 @@ void swap_mem(void* z1, void* z2, size_t size) {
 		t1[i] = t2[i];
 		t2[i] = tmp[i];
 	}
+
+	free(tmp);
 }
 
 int main(int argc, char* argv[]) {

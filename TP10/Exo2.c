@@ -30,11 +30,17 @@ void print_list(List l) {
 	}
 }
 
+void free_cell(Cell* c) {
+	free(c->first_name);
+	free(c->last_name);
+	free(c);
+}
+
 void free_list(List l) {
 	List tmp = l;
 	while (l!=NULL) {
 		tmp = l->next;
-		free(l);
+		free_cell(l);
 		l = tmp;
 	}
 }
@@ -47,18 +53,20 @@ Cell* cell_from_sentence(char* s) {
 	char* sub = (char*) malloc(strlen(s)+1);
 	int n_sub = 0;
 
-	char* first_name = (char*) malloc(strlen(s)+1);
-	char* last_name = (char*) malloc(strlen(s)+1);
+	char* first_name = NULL;
+	char* last_name = NULL;
 
 	// On parcourt la chaine
 	while (c!='\0' && c!='\n'){
 		if(c==' ') { 
 			// Si on tombe sur un espace, on coupe et on récupère d'abord le prénom puis le nom
 			sub[n_sub]='\0';
-			if (strlen(first_name)==0) {
+			if (first_name==NULL) {
+				first_name = (char*) malloc(strlen(sub)+1);
 				strcpy(first_name, sub);
 				
 			} else {
+				last_name = (char*) malloc(strlen(sub)+1);
 				strcpy(last_name, sub);
 			}
 			n_sub = 0;
@@ -120,52 +128,53 @@ int age_order(Cell* p1, Cell* p2) {
 	return 1;
 }
 
-void ordered_insertion(List* l, Cell* c, int order_func(Cell*, Cell*)) {
+List ordered_insertion(List l, Cell* c, int order_func(Cell*, Cell*)) {
 	if (c==NULL) {
-		return;
+		return l;
 	}
-	if (*l==NULL) {
+	if (l==NULL) {
 		c->next = NULL;
-		l = &c;
-		return;
+		l = c;
+		return l;
 	}
 
-	// Erreur pour remplacer la première cellule ?!
-	Cell* tmp = *l;
+	Cell* tmp = l;
 	if (order_func(tmp, c)==1) {
 		c->next = tmp;
-		l = &c;
+		l = c;
+		return l;
 	}
 	while (tmp->next!=NULL) {
 		if (order_func(tmp->next, c)==1) {
 			c->next = tmp->next;
 			tmp->next = c;
-			return;
+			return l;
 		}
 		tmp = tmp->next;
 	}
 	tmp->next = c;
 	c->next = NULL;
-	return;
+	return l;
 }
 
 // si type_order="age", on tri par rapport à l'âge sinon alphabétiquement
-void parse_file(char* name_file, List* l, char* type_order) {
+List parse_file(char* name_file, List l, char* type_order) {
 	FILE* f = fopen(name_file, "r");
 	if (f==NULL) {
-		return;
+		return l;
 	}
 	char s[4096];
 	while (fgets(s, 4096, f)!=NULL) {
 		Cell* c = cell_from_sentence(s);
 		if (strcmp(type_order, "age")==0) {
-			ordered_insertion(l, c, age_order);
+			l = ordered_insertion(l, c, age_order);
 		} else {
-			ordered_insertion(l, c, name_order);
+			l = ordered_insertion(l, c, name_order);
 		}
 		
 	}
 	fclose(f);
+	return l;
 }
 
 
@@ -183,7 +192,7 @@ int main(int argc, char* argv[]) {
 	// ----
 
 	List l = NULL;
-	parse_file("liste_nom.txt", &l, "autre");
+	l = parse_file("liste_nom.txt", l, "autre");
 	print_list(l);
 	free_list(l);
 

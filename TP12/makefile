@@ -12,4 +12,4 @@ hachage: hachage.o
 clean: 
 	rm -f *.o
 	rm -f *~
-	rm -f main
+	rm -f simplelist hachage

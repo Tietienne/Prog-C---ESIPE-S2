@@ -15,6 +15,9 @@ table *create_table(int M) {
     tab->distinct = 0;
 
     node **bucket = malloc(sizeof(node)*M);
+    for (int i = 0; i<M; i++) {
+        bucket[i] = NULL;
+    }
     tab->bucket = bucket;
     return tab;
 }

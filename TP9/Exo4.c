@@ -26,12 +26,18 @@ void free_tab(int* tab) {
 }
 
 int main(int argc, char* argv[]) {
-	if (argc>=2) {
-		int size = atoi(argv[1]);
-		int * tab = alloc_tab(size);
-		insert_tab(tab, size);
-		print_tab(tab, size);
-		free_tab(tab);
-	}
+	int size = 10;
+	int * tab = alloc_tab(size);
+	int * tab2 = alloc_tab(size);
+	print_info_zone(tab);
+	print_info_zone(tab2);
+	free(tab);
+	int * tab3 = alloc_tab(size);
+	print_info_zone(tab3);
+	int * tab4 = alloc_tab(20);
+	print_info_zone(tab4);
+	free_tab(tab2);
+	free_tab(tab3);
+	free_tab(tab4);
 	return 0;
 }
