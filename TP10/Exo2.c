@@ -62,8 +62,8 @@ Cell* cell_from_sentence(char* s) {
 			// Si on tombe sur un espace, on coupe et on récupère d'abord le prénom puis le nom
 			sub[n_sub]='\0';
 			if (first_name==NULL) {
-				first_name = (char*) malloc(strlen(sub)+1);
-				strcpy(first_name, sub);
+				first_name = (char*) malloc(strlen(sub)+1); // On alloue la taille de notre chaine en fonction de la taille actuelle de la chaine parcourue.
+				strcpy(first_name, sub);		    // Ainsi, on évite d'allouer plus de mémoire que nécessaire (strlen(s) par exemple).
 				
 			} else {
 				last_name = (char*) malloc(strlen(sub)+1);
@@ -128,7 +128,7 @@ int age_order(Cell* p1, Cell* p2) {
 	return 1;
 }
 
-List ordered_insertion(List l, Cell* c, int order_func(Cell*, Cell*)) {
+List ordered_insertion(List l, Cell* c, int order_func(Cell*, Cell*)) { // 3ème paramètre : une fonction générique prenant 2 argument Cell*
 	if (c==NULL) {
 		return l;
 	}
@@ -139,12 +139,14 @@ List ordered_insertion(List l, Cell* c, int order_func(Cell*, Cell*)) {
 	}
 
 	Cell* tmp = l;
+	// Si 1er élément : on insére au début de la liste
 	if (order_func(tmp, c)==1) {
 		c->next = tmp;
 		l = c;
 		return l;
 	}
 	while (tmp->next!=NULL) {
+		// Si on trouve l'emplacement de notre cellule : on l'insére
 		if (order_func(tmp->next, c)==1) {
 			c->next = tmp->next;
 			tmp->next = c;
