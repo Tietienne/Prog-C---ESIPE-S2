@@ -6,6 +6,7 @@ void swap_mem(void* z1, void* z2, size_t size) {
 	unsigned char* t2 = (unsigned char*) z2;
 	unsigned char* tmp = (unsigned char*) malloc(size);
 
+	// On swap la zone mémoire caractère par caractère
 	for (int i=0; i<size; i++) {
 		tmp[i] = t1[i];
 		t1[i] = t2[i];
