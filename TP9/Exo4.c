@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 	print_info_zone(tab2);
 	free(tab);
 	int * tab3 = alloc_tab(size);
-	print_info_zone(tab3);
+	print_info_zone(tab3); // Les infos de la zone sont identiques à celle de tab
 	int * tab4 = alloc_tab(20);
 	print_info_zone(tab4);
 	free_tab(tab2);
