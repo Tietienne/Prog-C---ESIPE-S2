@@ -17,7 +17,6 @@ void InitialisationPlateau(Plateau* P){
 	P->column_bs = NB_COL-1;
 }
 
-// Problème avec le free : le trouver et le résoudre
 void freePlateau(Plateau* P) {
 	for (int i=0; i<NB_LIG; i++) {
 		for(int j=0; j<NB_COL; j++) {
@@ -39,6 +38,7 @@ int isFinish(Plateau* P) {
 	return 1;
 }
 
+// BS = Black Square
 void getCoordsBS(Plateau* P, int* line_bs, int* column_bs) {
 	*line_bs = P->line_bs;
 	*column_bs = P->column_bs;
