@@ -29,7 +29,7 @@ void set_negative_bit_ULI(unsigned long int* n, int position) {
 int game_over(unsigned long int n) {
 	for (int i = 63; i>=0; i--) {
 		if (!(n&((unsigned long int) 1<<i))) {
-			return 0;
+			return 0; // S'il reste 1 bit disponible : ce n'est pas perdu
 		}
 	}
 	return 1;
@@ -45,23 +45,25 @@ void set_all_positive_bits(unsigned long int* n, int line, int column) {
 
 	int i, j, k, l;
 	// Diagonales //
-	if (line<=column) {
+	if (line<=column) { // Premier cas de diagonales
 		i = 0; // ligne
 		j = column - line; // colonne
+		
 		k = 0; // ligne
 		l = column + line; // colonne
-	} else {
+	} else { // Deuxième cas de diagonale
 		i = line - column; // ligne
 		j = 0; // colonne
+		
 		k = 0; // ligne
 		l = column + line; // colonne
 	}
-	while (i<8 && j<8) {
+	while (i<8 && j<8) { // 1ère diagonale
 		set_positive_bit_ULI(n, line_column_to_position(i, j));
 		i++;
 		j++;
 	}
-	while (k<8 && l<0) {
+	while (k<8 && l<0) { // 2nde diagonale
 		set_positive_bit_ULI(n, line_column_to_position(k, l));
 		k++;
 		l--;
