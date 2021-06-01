@@ -31,14 +31,15 @@ int main(int argc, char* argv[]){
 	create_board(width, height, marge, case_size);
 	int dame = 0;
 	unsigned long int n = 0;
-	while (dame!=8 && game_over(n)!=1) {
+	while (dame!=8 && game_over(n)!=1) { // Les 2 cas d'arrêts de jeu
 		int x, y, line, column, position;
 		MLV_wait_mouse(&x, &y);
 		if (x<case_size*8 && y<case_size*8) {
+			// Translation x, y en ligne, colonne
 			line = y/case_size;
 			column = x/case_size;
 			position = line_column_to_position(line, column);
-			if (bit_value_ULI(n, position)==0) {
+			if (bit_value_ULI(n, position)==0) { // Avant d'ajouter, on vérifie que la case est disponible
 				add_dame(line, column, case_size, &n, &dame);
 			}
 		}
