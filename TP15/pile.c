@@ -24,6 +24,7 @@ void free_pile(node *p) {
 
 int verify_first_elements(node* p) {
 	if (p==NULL || p->previous==NULL) {
+		printf("Manque 1 ou plusieurs opérandes !\n");
 		return 0;
 	}
 	return 1;
@@ -37,14 +38,22 @@ node* insert_pile(node* p, int elt) {
 
 void print_head(node* p) {
 	if (p==NULL) {
+		printf("Pile vide !\n");
 		return;
 	}
 	printf("%d\n", p->elt);
 }
 
 void print_pile(node* p) {
-	print_head(p);
-	print_pile(p->previous);
+	if (p==NULL) {
+		printf("Pile vide !\n");
+		return;
+	}
+	node* tmp = p;
+	while(tmp) {
+		tmp->previous==NULL ? printf("%d\n", tmp->elt) : printf("%d ", tmp->elt);
+		tmp = tmp->previous;
+	}
 }
 
 node* reverse_head(node* p) {
@@ -113,6 +122,7 @@ node* mod(node* p) {
 
 node* facto(node* p) {
 	if (p==NULL) {
+		printf("Manque 1 opérande !\n");
 		return p;
 	}
 	int result = 1;
