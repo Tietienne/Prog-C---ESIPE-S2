@@ -19,7 +19,7 @@ La commande "*make clean*" est aussi disponible afin de nettoyer tous les fichie
 
 A l'exception des TPs 11 et 13, qui utilise la bibliothèque libMLV, tous les autres TPs n'ont aucune perte de mémoire ou d'erreurs (vérification avec valgrind).
 
-**ATTENTION :** Il est nécessaire d'installer la bibliothèque GNU readline pour compiler le TP15. Sous Debian-like, il faut utilsier la commande : "*sudo apt-get installlibreadline-dev*".
+**ATTENTION :** Il est nécessaire d'installer la bibliothèque GNU readline pour compiler le TP15. Sous Debian-like, il faut utiliser la commande : "*sudo apt-get installlibreadline-dev*".
 
 # Contenu détaillé des TPs
 
